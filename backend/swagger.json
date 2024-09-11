@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API documentation for the Flask app.",
+    "version": "1.0.0",
+    "title": "Flask API"
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Register a new user",
+        "description": "Creates a new user with the provided username and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string" },
+                "password": { "type": "string" },
+                "email": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "User registered successfully" },
+          "400": { "description": "User already exists" }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login a user",
+        "description": "Authenticates a user with their credentials",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string" },
+                "password": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "User logged in successfully" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/children": {
+      "get": {
+        "summary": "Get a list of children",
+        "description": "Returns a paginated list of children",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of children per page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of children returned" }
+        }
+      }
+    }
+  }
+}
